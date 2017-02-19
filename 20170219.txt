@@ -1,0 +1,151 @@
+1基本工具的使用
+Git、编辑器、开发调试、PS、翻墙软件、笔记工具、流程图工具、思维导图工具
+
+Git
+ 安装
+	 百度云盘pub下面有资源
+	 有弹窗出现说明装好了
+	 输入$ git config --global user.name "827727408"
+		 $ git config --global user.email "827727408@qq.com"
+  创建版本库
+     $ mkdir learngit
+	 $ cd learngit
+	 $pwd
+	 /users/micheal/learngit
+	
+	 pwd命令用于显示当前目录
+  初始化仓库
+	 $git init
+	  Initialized empty Git repository in/Users/micheal/learngit/.git/
+  先写代码内容
+	  notepad++设置UTF-8 without BOM
+	  编辑***.txt
+  上传代码
+      txt放到learnGit目录下
+	  $ git add ***.txt
+	  $ git add ***.txt ***.txt
+	  $ git commit -m "description"
+  OK
+  第二天代码改了
+    learnGit下的***txt改了
+  先看状态
+     $ git status
+   看改动了哪里
+     $ git diff 888.txt
+  上传文件
+     $ git add ***.txt
+	 $ git status
+	 $ git commit -m "description"
+     $ git status
+  OK
+  第三天想回退
+    查看所有版本
+	$ git log
+	先是从近到远的提交日志
+	如果觉得上下太长条可以这样写：
+    $ git log --pretty=oneline
+  回退到上一个版本
+	$ git reset --hard HEAD^
+	上上一个版本就是HEAD^^
+    上100个版本携程HEAD~100
+	HEAD相当于指针
+	不过返回之后 最新的版本不见了
+	$git log 发现不见了
+  退完之后又后悔了
+     回到指定版本
+	 $ git reset -hard 3628164
+	 3628164是commit的id,意思是版本号git log 里面的号码前几位
+  查看txt里面写了什么
+   $ cat ***.txt
+   OK
+  第四天尼玛不是昨天后悔，而是今天后悔，看不到commit的id了
+    $ git reflog
+	然后看到了commit的id
+	git log是看提交历史，以便回退到哪个版本。
+	git reflog是看命令历史，以便要回到哪个未来的版本。
+  OK
+  第五天 已经有好几天没有提交了
+    想看看现在手头的和数据库的有什么区别
+	$ git diff HEAD --***.txt
+  第六天夜里
+    写完txt发现错误，想直接丢掉工作区的修改
+	$ git checkout --***.txt
+	 git checkout的意思其实是用版本库里面的版本替换工作区的版本。
+	如果add过后才发现错误，丢弃用
+	$ git reset HEAD file 餐后继续操作
+    如果已经修改到版本了，就要版本回退了
+	不过要思考一下有没有推送到远程库 就是那个猫咪网站上
+  第七天，你觉得代码太累赘了，要瘦身
+		$ rm ***.txt
+		或者手动在文件管理器里面删了
+		这时候你想看看删过了 它有没有反应
+		$ git status
+	从版本库里面删除
+	 $ git rm 并且 $ git commit 
+	    git rm 用于删除一个文件，如果文件已经被提交到版本库，就永远不用担心被误删
+		但是你只能恢复文件到最新版本，会失去最近一次提交后修改的内容。
+      OK
+  第n天，你想把本地的Git仓库和Github仓库链接
+        搜了一下没有.ssh目录，然后在Windows下打开 Git Bash，为创建SSH Key,写下：
+		 $ ssh-keygen -t rsa -C "827727408@qq.com"
+		 一路回车
+		 找到.ssh之后打开
+		 在Github网站里面找到settings/keys
+		 粘贴puk的内容，得到钥匙
+		 如果有多台设备 添加多台的key
+		 这样就能识别了
+		 OK
+	在Github下面创造一个git库
+		 create new response +号
+		名字要和本地的相同比如learngit.确定
+         在learngit文件下右击点击Githun Bash，然后输入：
+         $git remote add origin git@github.com:michaelliao/learngit.git
+         $ git push -u origin master
+		 由于远程库是空的，我们第一次推送master分支时，加上了-u参数，
+	     后来提交都可以用
+		 $ git push origin master
+		 OK
+		从Github网站克隆什么的看网页吧。
+		http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375233990231ac8cf32ef1b24887a5209f83e01cb94b000
+	
+	
+	
+	
+
+chrome开发调试工具 快捷键ctrl+shift+i
+F12 打开调试窗口
+
+Elements 用来定位元素HTML源代码
+可以ctrl+F搜索
+
+Natwork跟踪页面请求
+里面有地址、用时、返回值
+
+source可以看到当前页面的源代码
+Javascript CSS
+
+后面的4项用的少
+最后一项Console用来输出一些调试信息
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+把JavaScript嵌入到HTML方法；
+2<script src="..."></script>
+1<head>中
