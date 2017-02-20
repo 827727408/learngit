@@ -1,0 +1,803 @@
+﻿    inline-block特性与使用
+		http://baike.baidu.com/link?url=lfMoHMSK27EBn0DrCAA1dXdBdvg6W3JQRq7IbQ1nSk60FkzbGjqDFhtmg-RfpFTfqsMsyxdanb34PI-9UmDHLWeAJqJze_EfHd-3WY6lTSi
+	inline-height与vertical-align的用法
+		http://www.cnblogs.com/keyi/p/5841222.html
+	盒模型种类
+		http://blog.csdn.net/u012859748/article/details/52634927
+		http://blog.163.com/zx_1258/blog/static/133233799201301331041110/
+	浮动的特性与应用（两栏三栏布局）
+		http://blog.csdn.net/waitforfree/article/details/9110717
+	清除浮动clearfix
+		http://www.jb51.net/css/354375.html
+		http://www.jb51.net/css/99288.html
+		http://www.studyofnet.com/news/196.html
+	BFC
+		http://www.cnblogs.com/lhb25/p/inside-block-formatting-ontext.html
+	浮动与负边框的应用
+		http://www.cnblogs.com/fbzs/p/6373315.html
+	圣杯布局与双飞翼布局
+		http://www.cnblogs.com/lovemomo/p/4885866.html
+	常见CSS Hack
+		http://www.jb51.net/css/226888.html	
+	边框 微元素 定位的应用 三角 tooltip 绘制简单的效果
+		http://www.jb51.net/css/67124.html
+	
+			代码改变世界
+	CSS编码规范
+			1.格式化代码
+			1.1文件
+			[建议]：CSS文件使用无BOM的UTF-8编码
+			1.2缩进
+			[强制]：使用 4 个空格做为一个缩进层级，不允许使用 2 个空格 或 tab 字符。
+
+			.selector {
+				margin: 0;
+				padding: 0;
+			}
+
+			1.3空格
+			[强制]：选择器 与 { 之间必须包含空格。
+
+			.selector {
+
+			}
+
+			[强制]：选择器 与 { 之间必须包含空格。
+
+			margin: 0;
+			[强制]：列表性属性书在单行时，,后必须跟一个空格
+
+			font-family: Aria, sans-serif;
+			1.4行长度
+			[强制]： 每行不得超过 120 个字符，除非单行不可分割。
+
+			[建议]： 对于超长的样式，在样式值的 空格 处或 , 后换行，建议按逻辑分组。
+
+			/* 不同属性值按逻辑分组 */
+			background:
+				transparent url(aVeryVeryVeryLongUrlIsPlacedHere)
+				no-repeat 0 0;
+
+			/* 可重复多次的属性，每次重复一行 */
+			background-image:
+				url(aVeryVeryVeryLongUrlIsPlacedHere)
+				url(anotherVeryVeryVeryLongUrlIsPlacedHere);
+
+			/* 类似函数的属性值可以根据函数调用的缩进进行 */
+			background-image: -webkit-gradient(
+				linear,
+				left bottom,
+				left top,
+				color-stop(0.04, rgb(88,94,124)),
+				color-stop(0.52, rgb(115,123,162))
+			);
+
+			1.5选择器
+			[强制]：当一个 rule 包含多个 selector 时，每个选择器声明必须独占一行。
+
+			/* good */
+			.post,
+			.page,
+			.comment {
+				line-height: 1.5;
+			}
+
+			/* bad */
+			.post, .page, .comment {
+				line-height: 1.5;
+			}
+
+			[强制]： >、+、~ 选择器的两边各保留一个空格。
+
+			示例：
+
+			/* good */
+			main > nav {
+				padding: 10px;
+			}
+
+			label + input {
+				margin-left: 5px;
+			}
+
+			input:checked ~ button {
+				background-color: #69C;
+			}
+
+			/* bad */
+			main>nav {
+				padding: 10px;
+			}
+
+			label+input {
+				margin-left: 5px;
+			}
+
+			input:checked~button {
+				background-color: #69C;
+			}
+
+			[强制] 属性选择器中的值必须用双引号包围。
+
+			css
+			/* good */
+			article[character="juliet"] {
+				voice-family: "Vivien Leigh", victoria, female
+			}
+
+			/* bad */
+			article[character='juliet'] {
+				voice-family: "Vivien Leigh", victoria, female
+			}
+
+			2.选择器与属性缩写
+			2.1选择器
+			[强制] 如无必要，不得为 id、class 选择器添加类型选择器进行限定。
+
+			解释：在性能和维护性上，都有一定的影响。
+
+			示例：
+
+			css
+			/* good */
+			#error,
+			.danger-message {
+				font-color: #c00;
+			}
+
+			/* bad */
+			dialog#error,
+			p.danger-message {
+				font-color: #c00;
+			}
+
+			[建议] 选择器的嵌套层级应不大于 3 级，位置靠后的限定条件应尽可能精确。
+
+			示例：
+
+			/* good */
+			#username input {}
+			.comment .avatar {}
+
+			/* bad */
+			.page .header .login #username input {}
+			.comment div * {}
+
+			2.2 属性缩写
+			[建议] 在可以使用缩写的情况下，尽量使用属性缩写。
+
+			示例：
+
+			/* good */
+			.post {
+				font: 12px/1.5 arial, sans-serif;
+			}
+
+			/* bad */
+			.post {
+				font-family: arial, sans-serif;
+				font-size: 12px;
+				line-height: 1.5;
+			}
+
+			[建议] 使用 border / margin / padding 等缩写时，应注意隐含值对实际数值的影响，确实需要设置多个方向的值时才使用缩写。
+
+			解释：border / margin / padding 等缩写会同时设置多个属性的值，容易覆盖不需要覆盖的设定。如某些方向需要继承其他声明的值，则应该分开设置。
+
+			示例：
+
+			/* centering <article class="page"> horizontally and highlight featured ones */
+			article {
+				margin: 5px;
+				border: 1px solid #999;
+			}
+
+			/* good */
+			.page {
+				margin-right: auto;
+				margin-left: auto;
+			}
+
+			.featured {
+				border-color: #69c;
+			}
+
+			/* bad */
+			.page {
+				margin: 5px auto; /* introducing redundancy */
+			}
+
+			.featured {
+				border: 1px solid #69c; /* introducing redundancy */
+			}
+
+			2.3 每个规则集之间保留一个空行
+
+			/* good */
+			.selector1 {
+			  display: block;
+			  width: 100px;
+			}
+			.selector2 {
+			  padding: 10px;
+			  margin: 10px auto;
+			}
+
+			/* bad */
+			.selector1 {
+			  display: block;
+			  width: 100px;
+			}
+
+			.selector2 {
+			  padding: 10px;
+			  margin: 10px auto;
+			}
+
+			3.值与单位
+			3.1 文本
+			[强制] 文本内容必须用双引号包围。
+
+			解释：文本类型的内容可能在选择器、属性值等内容中。
+			示例：
+
+			/* good */
+			html[lang|="zh"] q:before {
+				font-family: "Microsoft YaHei", sans-serif;
+				content: "“";
+			}
+
+			html[lang|="zh"] q:after {
+				font-family: "Microsoft YaHei", sans-serif;
+				content: "”";
+			}
+
+			/* bad */
+			html[lang|=zh] q:before {
+				font-family: 'Microsoft YaHei', sans-serif;
+				content: '“';
+			}
+
+			html[lang|=zh] q:after {
+				font-family: "Microsoft YaHei", sans-serif;
+				content: "”";
+			}
+
+			3.2 数值
+			[强制] 当数值为 0 - 1 之间的小数时，省略整数部分的 0。
+
+			示例：
+
+			/* good */
+			panel {
+				opacity: .8
+			}
+
+			/* bad */
+			panel {
+				opacity: 0.8
+			}
+
+			4.3 url()
+			[强制] url() 函数中的路径不加引号。
+
+			示例：
+
+			body {
+				background: url(bg.png);
+			}
+
+			3.3 长度
+			[强制] 长度为 0 时须省略单位。 (也只有长度单位可省)
+
+			示例：
+
+			/* good */
+			body {
+				padding: 0 5px;
+			}
+
+			/* bad */
+			body {
+				padding: 0px 5px;
+			}
+
+			3.4 颜色
+			[强制] RGB颜色值必须使用十六进制记号形式 #rrggbb。不允许使用 rgb()。
+
+			/* good */
+			.success {
+				box-shadow: 0 0 2px rgba(0, 128, 0, .3);
+				border-color: #008000;
+			}
+
+			/* bad */
+			.success {
+				box-shadow: 0 0 2px rgba(0,128,0,.3);
+				border-color: rgb(0, 128, 0);
+			}
+
+			[强制] 颜色值可以缩写时，必须使用缩写形式。
+
+			示例：
+
+			/* good */
+			.success {
+				background-color: #aca;
+			}
+
+			/* bad */
+			.success {
+				background-color: #aaccaa;
+			}
+
+			[强制] 颜色值不允许使用命名色值。
+
+			示例：
+
+			/* good */
+			.success {
+				color: #90ee90;
+			}
+
+			/* bad */
+			.success {
+				color: lightgreen;
+			}
+
+			[建议] 颜色值中的英文字符采用小写。如不用小写也需要保证同一项目内保持大小写一致。
+
+			示例：
+
+			/* good */
+			.success {
+				background-color: #aca;
+				color: #90ee90;
+			}
+
+			/* good */
+			.success {
+				background-color: #ACA;
+				color: #90EE90;
+			}
+
+			/* bad */
+			.success {
+				background-color: #ACA;
+				color: #90ee90;
+			}
+
+			3.5 2D 位置
+			[强制] 必须同时给出水平和垂直方向的位置。
+
+			解释：
+			2D 位置初始值为 0% 0%，但在只有一个方向的值时，另一个方向的值会被解析为 center。为避免理解上的困扰，应同时给出两个方向的值。background-position属性值的定义
+
+			示例：
+
+			/* good */
+			body {
+				background-position: center top; /* 50% 0% */
+			}
+
+			/* bad */
+			body {
+				background-position: top; /* 50% 0% */
+			}
+
+			4.文本编排
+			4.1 字体族
+			[强制] font-family 属性中的字体族名称应使用字体的英文 Family Name，其中如有空格，须放置在引号中。
+
+			解释：
+			所谓英文 Family Name，为字体文件的一个元数据，常见名称如下：
+			字体	操作系统	Family Name
+			宋体 (中易宋体) 	Windows 	SimSun
+			黑体 (中易黑体) 	Windows 	SimHei
+			微软雅黑 	Windows 	Microsoft YaHei
+			微软正黑 	Windows 	Microsoft JhengHei
+			华文黑体 	Mac/iOS 	STHeiti
+			冬青黑体 	Mac/iOS 	Hiragino Sans GB
+			文泉驿正黑 	Linux 	WenQuanYi Zen Hei
+			文泉驿微米黑 	Linux 	WenQuanYi Micro Hei
+
+			示例：
+
+			h1 {
+				font-family: "Microsoft YaHei";
+			}
+
+			[强制] font-family 按「西文字体在前、中文字体在后」、「效果佳 (质量高/更能满足需求) 的字体在前、效果一般的字体在后」的顺序编写，最后必须指定一个通用字体族( serif / sans-serif )
+
+			解释：
+			更详细说明可参考本文。
+
+			示例：
+
+			/* Display according to platform */
+			.article {
+				font-family: Arial, sans-serif;
+			}
+
+			/* Specific for most platforms */
+			h1 {
+				font-family: "Helvetica Neue", Arial, "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
+			}
+
+			[强制] font-family 不区分大小写，但在同一个项目中，同样的 Family Name 大小写必须统一。
+
+			示例：
+
+			/* good */
+			body {
+				font-family: Arial, sans-serif;
+			}
+
+			h1 {
+				font-family: Arial, "Microsoft YaHei", sans-serif;
+			}
+
+			/* bad */
+			body {
+				font-family: arial, sans-serif;
+			}
+
+			h1 {
+				font-family: Arial, "Microsoft YaHei", sans-serif;
+			}
+
+			4.2 字号
+			[强制] 需要在 Windows 平台显示的中文内容，其字号应不小于 12px。
+
+			解释：由于 Windows 的字体渲染机制，小于 12px 的文字显示效果极差、难以辨认。
+			4.3 字体风格
+			[建议] 需要在 Windows 平台显示的中文内容，不要使用除 normal 外的 font-style。其他平台也应慎用。
+
+			解释：
+			由于中文字体没有 italic 风格的实现，所有浏览器下都会 fallback 到 obilique 实现 (自动拟合为斜体)，小字号下 (特别是 Windows 下会在小字号下使用点阵字体的情况下) 显示效果差，造成阅读困难。
+			6 变换与动画
+			[强制] 使用 transition 时应指定 transition-property。
+
+			示例：
+
+			/* good */
+			.box {
+				transition: color 1s, border-color 1s;
+			}
+
+			/* bad */
+			.box {
+				transition: all 1s;
+			}
+
+			[建议] 尽可能在浏览器能高效实现的属性上添加过渡和动画。
+
+			解释：
+			见本文，在可能的情况下应选择这样四种变换：
+
+				transform: translate(npx, npx);
+
+				transform: scale(n);
+
+				transform: rotate(ndeg);
+
+				opacity: 0..1;
+
+			典型的，可以使用 translate 来代替 left 作为动画属性。
+			示例：
+
+			/* good */
+			.box {
+				transition: transform 1s;
+			}
+			.box:hover {
+				transform: translate(20px); /* move right for 20px */
+			}
+
+			/* bad */
+			.box {
+				left: 0;
+				transition: left 1s;
+			}
+			.box:hover {
+				left: 20px; /* move right for 20px */
+			}
+
+			7 响应式
+			[强制] Media Query 如果有多个逗号分隔的条件时，应将每个条件放在单独一行中。
+
+			示例：
+
+			@media
+			(-webkit-min-device-pixel-ratio: 2), /* Webkit-based browsers */
+			(min--moz-device-pixel-ratio: 2),    /* Older Firefox browsers (prior to Firefox 16) */
+			(min-resolution: 2dppx),             /* The standard way */
+			(min-resolution: 192dpi) {           /* dppx fallback */
+				/* Retina-specific stuff here */
+			}
+
+			CSS注释
+			普通注释
+
+			/* 普通注释 */
+			区块注释
+
+			/**
+			 * 模块：m-detail
+			 * author: xxx
+			 * edit:   2016.5.02
+			 */
+
+			CSS命名规范
+			命名组成
+
+				命名必须由单词，中划线组成。例如:.info,.news-list
+
+				不推荐使用拼音来作为样式名，尤其是缩写的拼音、拼音与英文的混合
+
+				所有命名都使用小写,使用中划线 “-” 作为连接字符，而不是下划线 “_“
+
+			命名前缀
+			前缀	说明	示例
+			g- 	全局通用样式命名 	g-mod
+			m- 	模块命名方式 	m-detail
+			ui- 	组件命名方式 	ui-selector
+			j- 	所有用于纯交互的命名，不涉及任何样式规则。 	J-switch
+
+			不允许出现以类似：.info, .current, .news 开头的选择器，比如：
+
+			.info{sRules;} 
+			因为这样将给我们带来不可预知的管理麻烦以及沉重的历史包袱。你永远也不会知道哪些样式名已经被用掉了，如果你是一个新人，你可能会遭遇，你每定义个样式名，都有同名的样式已存在，然后你只能是换样式名或者覆盖规则。所以我们推荐这样写：
+
+			.m-xxx .info{sRules;}
+			所有的选择器必须是以 g-, m-, ui- 等有前缀的选择符开头的，意思就是说所有的规则都必须在某个相对的作用域下才生效，尽可能减少全局污染。 J- 这种级别的className完全交由JSer自定义，但是命名的规则也可以保持跟重构一致，比如说不能使用拼音之类的
+			命名单词
+
+				不以表现来命名，而是根据内容来命名。比如：left, right, center, red, black这种以表现来定命名，不允许出现；
+
+				推荐使用功能和内容相关词汇的命名，如:
+
+			套系:package
+			相册:photo-album
+			作品:works
+			攻略:raiders
+			普通用户:normal-user 
+			达人:talent-user
+			摄影师:photographer
+			用户昵称:user-alias
+			头像:head
+			地区:area
+			关注数:follow
+			粉丝数:followers
+			互相注意:attention
+			标签:label
+			发表时间:publish-date,publish-time
+			标题:title
+			信息:info
+			内容:content
+			关于我:about
+			简介内容:intro-content
+			评论:review 
+			服务:service
+			封面:cover
+			流行:popular
+			收藏:collect
+			查看:view
+			预约:reservation
+			促销:sale-promotion
+
+			(待补充)
+			编辑器配置
+
+			将你的编辑器按照下面的配置进行设置，以避免常见的代码不一致和差异：
+
+				使用4个空格缩进
+
+				使用Unix风格换行符(LF)
+
+				保存文件时，删除尾部的空白符。
+
+				设置文件编码为 UTF-8。
+
+				在文件结尾添加一个空白行。
+
+			参照文档并将这些配置信息添加到项目的 .editorconfig文件中。
+
+			// 示例
+			# css-creating coding style
+			root = true
+
+			# 为所有文件设置风格
+			[*]
+			charset = utf-8
+			indent_style = space
+			indent_size = 4
+			end_of_line = lf
+			trim_trailing_whitespace = true
+			insert_final_newline = true
+
+			# 为 Markdown 文件保留行尾空格
+			[*.md]
+			trim_trailing_whitespace = false
+3.JS与JQuery功底
+    页面渲染基本原理、白屏与FOUC、数据类型与类型转换、引用类型与基础类型的区别
+	深浅拷贝、声明前置、函数声明与函数表达式、字符串的各种操作、
+	正则的各种操作、贪婪模式与非贪婪模式、日期数字函数各种操作、作用域与作用域链的概念与应用、
+	闭包的概念与应用、IIFE的封装性、setTimeout相关概念、事件冒泡捕获机制
+	绑定事件的兼容性封装、事件代理、ajax的原理与封装、跨域的几种方式与实现、
+	jsonp的封装、原生js实现常见效果的实现（懒加载、点击加载、推到顶部、导航条、Dialog、Tab等）、jquery的语法与使用
+	jQuery实现各种常见效果（懒加载、点击加载、推到顶部、导航条、Modal模态框、Tab切换、各种轮播、
+	瀑布流布局、木桶布局、懒加载+ajax+瀑布流的使用等）
+	
+	做了这些以后，会写出精简、好看、复用性高的代码http://www.cnblogs.com/gods/p/4201530.html为目标而不是以实现效果为目标。
+	分析拆解未知问题能力有所提高，习惯于使用google搜索文档并掌握一些搜索技巧
+	http://www.cnblogs.com/webtrados/archive/2010/06/17/1759308.html#1868016
+	http://www.cnblogs.com/webtrados/archive/2010/06/17/1759311.html
+	https://www.zhihu.com/question/20161362
+	http://blog.jobbole.com/371/
+	http://www.xuetimes.com/archives/1160
+	、习惯看英文文档、
+	熟练使用调试工具定位错误解决问题，尝试总结记录甚至分享心得。
+
+4JS进阶
+	OOP的概念、构造函数创建对象的方法、原型与原型链（会画画）、继承的写法、功能模块化的写法、常见的设计模式（工厂、单例、发布订阅）、
+	面向对象的应用（轮播组件、Tab组件、曝光组件、日历组件、Dialog组件等）、JQuery插件的封装、JQuery核心源码解读、
+	HTTP&webserver相关知识点、CMD&AMD规范、模块化写法（Requirejs或者webpack使用）、npm的使用、
+	工程化概念与应用（gulp)、HTML5性功能、纯CSS做一些有意思的特效和动画（如按钮、渐变特效、
+	loading、CSS3轮播、3D轮播等）、响应式的应用（写一个bootstrap的删格系统）、CSS预处理等
+	less语言http://www.bootcss.com/p/lesscss/
+	sass语言http://www.ruanyifeng.com/blog/2012/06/sass.html
+	
+	node教程
+	ES6语法
+	用express搭建个博客
+	跑跑React Angular里的Demo,体验之后清楚知道他们的应用场景与利弊之道哪些需要深入哪些需要了解，
+-----------------------------------------------我是分隔符------------------------------------------
+页面渲染基本原理---洗澡
+
+去和尚那拿洗具
+施主说：有人在我头上写了网址让我洗澡，我向大师兄发出http请求，大师兄给我了http文件 洗具，（减少http请求，少用他跑腿请求，也别让一次拿太多东西）
+
+洗具没拿全，再去拿
+  施主再用<head>的时候，发现要用配套的CSS外部文件，又去大师兄那里请求，得到了css文件，（css文件合并，减少http请求，配套的东西合并一下，减少施主跑腿）
+
+洗发水放最上面
+ 施主用HTML中的<body>,并且CSS文件已经拿到手了对吧，就开始洗澡了。（CSS文件要放在最上面，避免弄不清晰的重点）
+
+护发素没拿
+ 施主在洗澡的时候没有<img>标签，像大师兄请求了，因为着急呀，不去大师兄那磨磨唧唧的，而且也不会等拿到手，而是继续洗洗澡。
+（图文要合并，减少http请求）	
+
+护发素要很油滑,先包好
+大师兄给施主图片，由于图片占用于是太多面积，弄脏了衣服澡具的放置，因此施主重新洗洗澡具（图片最好都设定好尺寸，避免重新洗）
+ 
+spa放在最下面
+施主发现一包葡萄味spa <script>,立刻用了，（script最好放在下面，是个惊喜，当然也洗的差不多了）
+
+spa比较刺激	
+ spa用了之后，有点鸡皮肤，事主不得不重新洗掉（页面初始化样式不要用js控制，初次见面洗澡，不要用特殊的spa）
+终于洗完了<html>，施主容光焕发.
+
+洗花式澡澡
+ 施主刚洗完还没出澡堂，头上又被写了，洗泡泡澡，Javascript让大师兄给换了个场景《link》标签的CSS路径，用户拖着膀子《div》《span》《li》，又去大师兄那要了新的喜剧。
+	
+影响页面渲染速度主要有：reflow（回流）和repaint(重绘）
+
+洗头发，头发干净了，其他也有沫，这是回流
+光洗手、洗毛巾，这是重绘。
+回流包括什么呢就是影响了布局，折叠、展开、显示、隐藏、大小
+重绘包括背景色、文字颜色
+
+那我们怎么做呢？就是洗单个的地方，能用class别用style
+能改子元素别改父元素
+
+当然这不是我们的性格，我们要洗就洗他个干净对不对？
+position的属性设置为fixed或者absolute
+
+减少不必要的DOM层级，就是洗毛巾的时候离远一点
+避免不必要的复杂CSS选择器，尤其是后台选择器，为了匹配选择器将耗尽更多的CPU，就是别花式洗澡，为了冲干净，废掉更多的水。
+
+-----------------------我是分隔符-----------------------------
+
+白屏与FOUC
+ 有的变白 有的变闪
+ 就像化妆品的粉底液一样，都是问题，化妆就是表现美，完全只剩白和闪多吓人和失败啊，这个使用的先后顺序有关，还有精华液的顺序有关
+  有的是施主使用量的问题浏览器的问题，这个没办法，不是技术性问题
+ 如果把css样式放到底部，有些浏览器会白屏，有些会出现闪，
+ 如果把js文件放在头部，脚本会阻塞右面的内容拉不出来，出现白屏 无内容，像没有东西的马桶
+
+--------------------------数据类型与类型转换------------------
+
+
+JS的数据类型有和山寨版的《白雪公主与7个小矮人》一样，有六个，
+分别叫男博、思纯、布尔、昂滴凡、奴、欧波杰克
+男博 比较直接 喜欢整浮点的
+思纯想得比较多一串一串的，所以用引号扩住，包括字母、数字、标点符号、空格，后来带有双引号的东东 都叫字符串
+布尔有两个孩子，都比较有出息，是关键词了，var flag=true z这个flag是他女朋友占了他孩子的光变成了布尔值，这一点很特别
+昂滴凡通常是指没有男朋友赋值的单身狗，一直想着吴亦凡，可用过typeof对他判断是不是昂滴凡 var a =underfine ;alert(typeof a),结果就是昂滴凡
+奴是一个空间，没有东西，var a =null，意思是将a清空变成一个空间一朵云。 
+欧波杰克是最不正常的了，是百变妖精，热情，把彼此相关的属性和方法集合在一起构成一个数据实体就是他，对是他是他就是他。常常组成一个班，常见的变成array，女人艾瑞，小孩温豆，男人道客特。
+
+array是个很性感的人，喜欢买罩罩，每次买的罩杯都被用线索引住了，怕分不清哪次买的，默认从零开始。
+1买罩罩 var arr=new Array(1,2,3);2.直接使用面向字面量var a=[1,2,3];
+-----------------------引用类型与基础类型的区别----------------
+堆与栈的概念 Heap Stack
+堆 是动态的分配的，jvm不会自动释放这部分内存。只待gc来内存回收。
+钱的分配方式：大生产中，百姓家有多余的钱是不会上交的，等小队长上门来要。
+栈 是在类加载中有系统静态分配的，而且分配时按照内存的高低地址分配。
+这部分内存系统会自动进行释放。
+政府算过钱之后，按话费的高低进行分配，多余的钱已经算好，自动送过来。
+数据结构中也有堆的概念。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+		
+		
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
